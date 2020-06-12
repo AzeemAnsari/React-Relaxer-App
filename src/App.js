@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './App.css';
 import Logo from './logo.png';
 
@@ -9,16 +10,10 @@ class App extends React.Component {
   
    startNow = () => {
      this.breathAnimation()
-     setInterval(() => {
+     const myInterval = setInterval(() => {
        this.breathAnimation()
      }, 7500)
    }
-
-   stop = () => {
-    clearInterval(this.myInterval)
-   }
-
-
 
    breatheIn(){
      this.setState({
@@ -29,8 +24,8 @@ class App extends React.Component {
 
    breatheHold(){
      this.setState({
-       text: 'Hold',
-       direction: 'grow'
+       direction: 'grow',
+       text: 'Hold'
      })
    }
 
@@ -39,6 +34,35 @@ class App extends React.Component {
        direction: 'shrink',
        text: 'Breathe Out'
      })
+   }
+
+   resetbreatheIn(){
+     this.setState({
+       direction: '',
+       text: ''
+     })
+   }
+
+   resetbreatheHold(){
+     this.setState({
+       text: '',
+       direction: ''
+     })
+   }
+
+   resetbreatheOut(){
+     this.setState({
+       direction: '',
+       text: ''
+     })
+   }
+
+   stopFunction = () => {
+     clearInterval(this.myInterval)
+     this.setState({pointer: ''})
+     this.resetbreatheIn();
+     this.resetbreatheHold();
+     this.resetbreatheOut();
    }
  
   breathAnimation = () => {
@@ -62,13 +86,13 @@ class App extends React.Component {
   return (
     <div className="main">
     <div><img src={Logo} alt="Azeem Ansari" /></div>
-    <button onClick={this.startNow}>Start Now</button>
-    <button onClick={this.stop}>Stop</button>
+    <button type="button" onClick={this.startNow}>Start Now</button>
+    <button type="button" onClick={this.stopFunction}>Stop</button>
     <h1>Relax</h1>
     <div className={`container ${this.state.direction}`}>
       <div className="circle"></div>
 
-      <p id="text">{this.state.text.toUpperCase()}</p>
+      <p>{this.state.text.toUpperCase()}</p>
 
       <div className={`pointer-container ${this.state.pointer}`}>
         <span className="pointer"></span>
