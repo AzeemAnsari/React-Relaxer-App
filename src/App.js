@@ -1,18 +1,24 @@
 import React from 'react';
 import './App.css';
-import Logo from './logo.png'
+import Logo from './logo.png';
 
 
 class App extends React.Component {
 
-  state = {direction : "grow", text: "Breathe In!"}
+  state = {direction : '', text:'', pointer: ''}
   
-   componentDidMount(){
+   startNow = () => {
      this.breathAnimation()
      setInterval(() => {
        this.breathAnimation()
      }, 7500)
    }
+
+   stop = () => {
+    clearInterval(this.myInterval)
+   }
+
+
 
    breatheIn(){
      this.setState({
@@ -39,6 +45,7 @@ class App extends React.Component {
     const totalTime = 7500;
     const breatheTime = (totalTime / 5) * 2;
     const holdTime = totalTime / 5;
+    this.setState({pointer: 'start'})
     this.breatheIn()
 
     setTimeout(() => {
@@ -52,18 +59,18 @@ class App extends React.Component {
 
   render(){
     
-    
-
   return (
     <div className="main">
     <div><img src={Logo} alt="Azeem Ansari" /></div>
+    <button onClick={this.startNow}>Start Now</button>
+    <button onClick={this.stop}>Stop</button>
     <h1>Relax</h1>
-    <div className={'container ' + this.state.direction}>
+    <div className={`container ${this.state.direction}`}>
       <div className="circle"></div>
 
       <p id="text">{this.state.text.toUpperCase()}</p>
 
-      <div className="pointer-container">
+      <div className={`pointer-container ${this.state.pointer}`}>
         <span className="pointer"></span>
       </div>
 
