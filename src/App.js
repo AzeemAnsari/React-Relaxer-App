@@ -43,16 +43,15 @@ class App extends React.Component {
 		this.setState({pointer: 'start'})
 		this.breatheIn()
 
-		const bhtimeOut = setTimeout(() => {
+		const bh = setTimeout(() => {
 			this.breatheHold()
 
-
-		const botimeOut =	setTimeout(() => {
-				this.breatheOut()		
+		const bo =	setTimeout(() => {
+				this.breatheOut()	
 			}, holdTime);
 		}, breatheTime);
-		// this.setState({clearBO: botimeOut});
-		this.setState({clearBH: bhtimeOut});
+		// this.setState({clearBO: bo});
+		this.setState({clearBH: bh});
 		
 	}
 
@@ -66,7 +65,7 @@ startNow = () => {
 	}
 
 stopFunction = () => {
-		clearTimeout(this.state.clearBH);
+		clearTimeout(this.state.clearBH, this.state.clearBO);
 		clearInterval(this.state.intervalID);
 		 this.setState({direction : '', text:'', toggle: false, pointer: ''})
 	 }
