@@ -7,13 +7,6 @@ import Logo from './logo.png';
 class App extends React.Component {
 
   state = {direction : '', text:'', pointer: ''}
-  
-   startNow = () => {
-     this.breathAnimation()
-     const myInterval = setInterval(() => {
-       this.breathAnimation()
-     }, 7500)
-   }
 
    breatheIn(){
      this.setState({
@@ -35,35 +28,6 @@ class App extends React.Component {
        text: 'Breathe Out'
      })
    }
-
-   resetbreatheIn(){
-     this.setState({
-       direction: '',
-       text: ''
-     })
-   }
-
-   resetbreatheHold(){
-     this.setState({
-       text: '',
-       direction: ''
-     })
-   }
-
-   resetbreatheOut(){
-     this.setState({
-       direction: '',
-       text: ''
-     })
-   }
-
-   stopFunction = () => {
-     clearInterval(this.myInterval)
-     this.setState({pointer: ''})
-     this.resetbreatheIn();
-     this.resetbreatheHold();
-     this.resetbreatheOut();
-   }
  
   breathAnimation = () => {
     const totalTime = 7500;
@@ -79,7 +43,18 @@ class App extends React.Component {
         this.breatheOut()
       }, holdTime);
     }, breatheTime);
-}
+  }
+
+startNow = () => {
+     this.breathAnimation()
+     const myInterval = setInterval(() => {
+       this.breathAnimation()
+     }, 7500)
+  }
+
+stopFunction = () => {
+     this.setState({direction : '', text:'', pointer: ''})
+   }
 
   render(){
     
