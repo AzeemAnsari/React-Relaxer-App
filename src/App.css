@@ -5,11 +5,10 @@
 }
 
 body {
-  background: #224941 url('./bg.jpg') no-repeat center center/cover;
+  background: #666e5d;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
   min-height: 100vh;
-  overflow: hidden;
   margin: 0;
 }
 
@@ -18,13 +17,15 @@ body {
   flex-direction: column;
   align-items: center;
   height: 90vh;
-
 }
 
 h1{
   text-align: center;
   margin-bottom: 0;
-  font-size: 3rem;
+  font-size: 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  text-shadow: -2px -2px 3px #b1b1b1, 3px 3px 5px rgba(0, 0, 0, 1);
 }
 
 .container {
@@ -95,6 +96,28 @@ h1{
   top: 10px;
 }
 
+button{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  border-radius: 5px;
+  padding: 15px 0;
+  /*box-shadow: 9px 9px 16px rgb(0,0,0,0.6);*/
+  outline: none;
+  border:none;
+  text-transform: uppercase;
+  width: 145px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: -3px -3px 7px #b1b1b1, 3px 3px 5px rgba(0, 0, 0, 1);
+  -webkit-box-shadow: -3px -3px 7px #b1b1b1, 3px 3px 5px rgba(0, 0, 0, 1);
+}
+.btn_start{
+  background-color: #679436; 
+}
+.btn_reset{
+  background-color:#d9282f;
+}
+
 @keyframes rotate {
   from {
     transform: rotate(0deg);
@@ -133,6 +156,37 @@ h1{
   }
 }
 
+@media screen and (min-width: 1200px){
+ p{font-size: 1.2rem;}
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1500px){
+ .container {
+  height: 260px;
+  width: 260px;
+  position: relative;
+  top:-10px;
+}
+
+.gradient-circle {
+  height: 280px;
+  width: 280px;
+}
+.pointer-container {
+    position: absolute;
+    top: -44px;
+    left: 120px;
+    width: 20px;
+    height: 173px;
+    transform-origin: bottom center;
+} 
+}
+
+@media screen and (max-width: 800px){
+  .logo{position: static;text-align: center;padding: 15px 15px 10px;}
+  h1{font-size: 2rem;}
+  .main{padding:0 0 15% 0;height: 100vh;}
+}
 
 @media screen and (max-width: 600px){
  .container {
@@ -152,6 +206,8 @@ h1{
     height: 145px;
     transform-origin: bottom center;
 }
+.logo{position: static;text-align: center;padding: 15px 15px 10px;}
+h1{font-size: 1.3rem;margin-top:0;}
 }
 
 @media screen and (max-width: 320px){
@@ -172,4 +228,9 @@ h1{
   height: 120px;
   transform-origin: bottom center; 
 }
+.logo{position: static;text-align: center;padding: 15px 15px 10px;}
+.logo img{width: 65%;}
+h1{font-size: 1rem;margin-top:0;}
+.container{margin-top:22%;}
+button{display: block;margin:22% auto 0;}
 }

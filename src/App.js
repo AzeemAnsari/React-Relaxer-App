@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.css';
-import Logo from './logo.png';
+import Logo from './logo.png'; 
 
 
 class App extends React.Component {
@@ -46,13 +46,12 @@ class App extends React.Component {
 		const bh = setTimeout(() => {
 			this.breatheHold()
 
-		const bo =	setTimeout(() => {
+		const bo = setTimeout(() => {
 				this.breatheOut()	
 			}, holdTime);
+		this.setState({clearBO: bo});
 		}, breatheTime);
-		// this.setState({clearBO: bo});
 		this.setState({clearBH: bh});
-		
 	}
 
 startNow = () => {
@@ -65,7 +64,8 @@ startNow = () => {
 	}
 
 stopFunction = () => {
-		clearTimeout(this.state.clearBH, this.state.clearBO);
+		clearTimeout(this.state.clearBH);
+		clearTimeout(this.state.clearBO);
 		clearInterval(this.state.intervalID);
 		 this.setState({direction : '', text:'', toggle: false, pointer: ''})
 	 }
@@ -75,7 +75,7 @@ stopFunction = () => {
 	return (
 		<div className="main">
 		<div className="logo"><img src={Logo} alt="Azeem Ansari" /></div>
-		<h1>Relax</h1>
+		<h1>Relaxer</h1>
 		<div className={`container ${this.state.direction}`}>
 			<div className="circle"></div>
 
@@ -88,7 +88,7 @@ stopFunction = () => {
 			<div className="gradient-circle"></div>
 
 		</div>
-		{this.state.toggle ? <button type="button" onClick={this.stopFunction}>Stop</button> : <button type="button" onClick={this.startNow}>Start Now</button>}
+		{this.state.toggle ? <button type="button" className="btn_reset" onClick={this.stopFunction}>Stop</button> : <button type="button" className="btn_start" onClick={this.startNow}>Start Now</button>}
 		</div>
 	);
 	}
