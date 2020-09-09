@@ -1,97 +1,88 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './App.css';
-import Logo from './logo.png'; 
+import Logo from './logo.png';
+import Header from './Header';
+import Button from './Button';
 
+const App = () => {
+  const [direction, setDirection] = useState('');
+  const [text, setText] = useState('');
+  const [pointer, setPointer] = useState('');
+  const [intervalId, setIntervalId] = useState('');
+  const [toggle, setToggle] = useState(false);
+  const [clearBH, setClearBH] = useState('');
+  const [clearBO, setClearBO] = useState('');
 
-class App extends React.Component {
+  const breatheIn = () => {
+    setDirection('grow');
+    setText('Breath In');
+  };
 
-	state = {direction : '',
-					text:'',
-					pointer: '',
-					intervalID: '',
-					toggle: false,
-					clearBH: '',
-					clearBO: ''
-				}
+  const breatheHold = () => {
+    setDirection('grow');
+    setText('hold');
+  };
 
-	 breatheIn(){
-		 this.setState({
-			 direction: 'grow',
-			 text: 'Breathe In'
-		 })
-	 }
+  const breatheOut = () => {
+    setDirection('shrink');
+    setText('Breathe Out');
+  };
 
-	 breatheHold(){
-		 this.setState({
-			 direction: 'grow',
-			 text: 'Hold'
-		 })
-	 }
+  const breathAnimation = () => {
+    const totalTime = 7500;
+    const breatheTime = (totalTime / 5) * 2;
+    const holdTime = totalTime / 5;
+    setPointer('start');
+    breatheIn();
 
-	 breatheOut(){
-		 this.setState({
-			 direction: 'shrink',
-			 text: 'Breathe Out'
-		 })
-	 }
- 
-	breathAnimation = () => {
-		const totalTime = 7500;
-		const breatheTime = (totalTime / 5) * 2;
-		const holdTime = totalTime / 5;
-		this.setState({pointer: 'start'})
-		this.breatheIn()
+    const bh = setTimeout(() => {
+      breatheHold();
 
-		const bh = setTimeout(() => {
-			this.breatheHold()
+      const bo = setTimeout(() => {
+        breatheOut();
+      }, holdTime);
+      setClearBO(bo);
+    }, breatheTime);
+    setClearBH(bh);
+  };
 
-		const bo = setTimeout(() => {
-				this.breatheOut()	
-			}, holdTime);
-		this.setState({clearBO: bo});
-		}, breatheTime);
-		this.setState({clearBH: bh});
-	}
+  const startNow = () => {
+    setToggle(true);
+    breathAnimation();
+    const myInterval = setInterval(() => {
+      breathAnimation();
+    }, 7500);
+    setIntervalId(myInterval);
+  };
 
-startNow = () => {
-		this.setState({toggle: true})
-		 this.breathAnimation()
-		 const myInterval = setInterval(() => {
-			 this.breathAnimation()
-		 }, 7500)
-		 this.setState({intervalID: myInterval})
-	}
+  const stopFunction = () => {
+    clearTimeout(clearBH);
+    clearTimeout(clearBO);
+    clearInterval(intervalId);
+    setDirection('');
+    setText('');
+    setToggle(false);
+    setPointer('');
+  };
 
-stopFunction = () => {
-		clearTimeout(this.state.clearBH);
-		clearTimeout(this.state.clearBO);
-		clearInterval(this.state.intervalID);
-		 this.setState({direction : '', text:'', toggle: false, pointer: ''})
-	 }
+  return (
+    <div className="main">
+      <Header Logo={Logo} />
+      <div className={`container ${direction}`}>
+        <div className="circle"></div>
 
-	render(){
-		
-	return (
-		<div className="main">
-		<div className="logo"><img src={Logo} alt="Azeem Ansari" /></div>
-		<h1>Relaxer</h1>
-		<div className={`container ${this.state.direction}`}>
-			<div className="circle"></div>
+        <p>{text.toUpperCase()}</p>
 
-			<p>{this.state.text.toUpperCase()}</p>
+        <div className={`pointer-container ${pointer}`}>
+          <span className="pointer"></span>
+        </div>
 
-			<div className={`pointer-container ${this.state.pointer}`}>
-				<span className="pointer"></span>
-			</div>
-
-			<div className="gradient-circle"></div>
-
-		</div>
-		{this.state.toggle ? <button type="button" className="btn_reset" onClick={this.stopFunction}>Stop</button> : <button type="button" className="btn_start" onClick={this.startNow}>Start Now</button>}
-		</div>
-	);
-	}
-}
+        <div className="gradient-circle"></div>
+      </div>
+      <Button toggle={toggle} startNow={startNow} stopFunction={stopFunction} />
+    </div>
+  );
+};
 
 export default App;
