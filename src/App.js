@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 
-import './App.css';
 import Logo from './logo.png';
 import Header from './Header';
 import Button from './Button';
+
+import {
+  Main,
+  Container,
+  Circle,
+  GradientCircle,
+  PointerContainer,
+  Pointer,
+  GlobalStyles,
+} from './Styles';
 
 const App = () => {
   const [direction, setDirection] = useState('');
@@ -67,21 +76,26 @@ const App = () => {
   };
 
   return (
-    <div className="main">
-      <Header Logo={Logo} />
-      <div className={`container ${direction}`}>
-        <div className="circle"></div>
+    <React.Fragment>
+      <Main>
+        <Header Logo={Logo} />
+        <Container className={direction}>
+          <Circle />
+          <p>{text.toUpperCase()}</p>
+          <PointerContainer className={pointer}>
+            <Pointer />
+          </PointerContainer>
 
-        <p>{text.toUpperCase()}</p>
-
-        <div className={`pointer-container ${pointer}`}>
-          <span className="pointer"></span>
-        </div>
-
-        <div className="gradient-circle"></div>
-      </div>
-      <Button toggle={toggle} startNow={startNow} stopFunction={stopFunction} />
-    </div>
+          <GradientCircle />
+        </Container>
+        <Button
+          toggle={toggle}
+          startNow={startNow}
+          stopFunction={stopFunction}
+        />
+      </Main>
+      <GlobalStyles />
+    </React.Fragment>
   );
 };
 

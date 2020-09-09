@@ -1,14 +1,15 @@
 import React from 'react';
+import { Buttons } from './Styles';
 
 const Button = ({ toggle, startNow, stopFunction }) => {
   return toggle ? (
-    <button type="button" className="btn_reset btn" onClick={stopFunction}>
+    <Buttons className="btn_reset" onClick={stopFunction}>
       Stop
-    </button>
+    </Buttons>
   ) : (
-    <button type="button" className="btn_start btn" onClick={startNow}>
+    <Buttons className="btn_start" onClick={startNow}>
       Start Now
-    </button>
+    </Buttons>
   );
 };
 
