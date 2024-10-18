@@ -1,6 +1,6 @@
 # ReactJs Relaxer PWA
 
-### [Live Site](https://relaxer.azeemansari.me/)
+### [Live Site](https://relaxer.azeemansari.in/)
 
 ![React Advice PWA](https://i.ibb.co/XycvMV6/Relaxer-App-React-Js.png)
 
